@@ -1,0 +1,77 @@
+<div class="container">
+    <form action="" #searchPlansForm="ngForm" (submit)="loadSearchPlans(searchPlansForm)" >  
+         <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="planName" class="fs-5">Select Plan:</label>
+                
+                <select class="form-control" id="planName" [(ngModel)]="p.planName" name="planName"  (change)="onChangePlanName($event)" >
+                    <option value="" >--SELECT--</option> 
+                    <option value="{{pname}}" *ngFor="let pname of planNames" >{{pname}}</option>
+                    
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="planStatus" class="fs-5">Select Status:</label>
+                
+                <select class="form-control" id="planStatus" [(ngModel)]="p.planStatus" name="planStatus"  (change)="onChangePlanStatus($event)" >
+                    <option value="" >--SELECT--</option>
+                    <option value="{{pstatus}}" *ngFor="let pstatus of planStatuses" >{{pstatus}}</option>
+                    
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <br>
+                <button class="btn btn-primary" type="submit" >Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- # Display all searched plans-->
+<div class="mt-5">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th >ID</th>
+            <th >Name</th>
+            <th >Holder's Name</th>
+            <th >Status</th>
+            <th >Benefit Amount</th>
+            <th >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let plan of planResponse">
+                <td>{{plan.planId}}</td>
+                <td>{{plan.planName}}</td>
+                <td>{{plan.holderName}}</td>
+                <td>{{plan.planStatus}}</td>
+                <td>{{plan.benefitAmt}}</td>
+                <td>
+                  <button class="btn btn-danger">Delete</button>
+                &nbsp;
+                  <button class="btn btn-info" >Update</button>
+                </td>
+            </tr>
+          
+        </tbody>
+      </table>
+</div>
+
+<div class="mt-5 row">
+    <label for="planStatus" class="fs-5">Downloads Plans:</label>
+    <div class="col-md-5">
+        
+        <button type="button" class="btn btn-success" id="dwnldExcel" (click)="downloadExcel()" >
+            Excel 
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+        </button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" id="dwnldPdf" (click)="downloadPdf()" >Pdf <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+    </div>
+</div>
+</div>
